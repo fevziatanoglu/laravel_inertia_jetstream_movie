@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MovieListController;
 use App\Http\Controllers\SearchController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -27,6 +29,8 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::get('mainpage', [DashboardController::class , 'index'])->name('get.dashboard');
 // search
 Route::get('search', [SearchController::class, 'index'])->name('search')->middleware('auth');
 Route::get('search/{query}', [SearchController::class, 'search'])->name('search.movies')->middleware('auth');
