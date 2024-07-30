@@ -38,6 +38,20 @@ class Movie extends Model
         );
     }
 
+    public static function getMovieScore(Movie $movie)
+    {
+
+        $score = 0;
+        $counter = 0;
+        foreach ($movie->comments as $comment) {
+            $score += $comment->score;
+            $counter++;
+        }
+
+        return ['avarage' => (int)$score/$counter , 'counter' => $counter];
+    }
+
+
     public static function findOrFetch($id)
     {
         // check db with id

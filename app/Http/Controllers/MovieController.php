@@ -20,11 +20,14 @@ class MovieController extends Controller
 
     function index($id)
     {
+
         $movie = Movie::findOrFetch($id);
+        $score = Movie::getMovieScore($movie);
         return Inertia::render(
             'Movie',
             [
                 'movie' => $movie,
+                'score' => $score,
             ]
         );
     }

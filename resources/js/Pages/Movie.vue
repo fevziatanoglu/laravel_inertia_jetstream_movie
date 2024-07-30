@@ -8,27 +8,28 @@ import { ref } from 'vue';
 
 const props = defineProps({
     movie: { type: Object, required: true },
+    score: { type: Object, required: true }
 }
 );
 
 
-console.log(props.movie)
+console.log(props.score)
 
 </script>
 
 
 <template>
-    <AppLayout :title="movie.title" class="bg-black">
+    <AppLayout :title="movie.title">
 
-        <MovieHeader :id="movie.id" :title="movie.title"/>
+        <MovieHeader :id="movie.id" :title="movie.title" />
 
         <!-- main -->
-        <div class="flex justify-center items-center bg-black">
+        <div class="relative  overflow-hidden flex justify-center  items-center  p-0 mt-3">
             <!-- backdrop -->
-            <!-- <img :src="movie.backdrop_path || movie.poster_path" alt="Movie backdrop"
-                class="h-screen  w-full  absolute  top-0  blur-lg opacity-50 bg-gradient-to from-black " /> -->
+            <img style="pointer-events: none" :src="movie.backdrop_path || movie.poster_path" alt="Movie backdrop"
+                class="h-screen  w-screen  absolute  top-0 blur-md   opacity-70 " />
             <!-- movie info container -->
-            <div class="h-full  py-16  w-full  flex flex-col justify-center items-center ">
+            <div class="h-full  py-16  w-full z-10 flex flex-col justify-center items-center bg-black bg-opacity-30 ">
                 <!-- movie info  -->
                 <div class="w-3/5  flex flex-row  gap-5 text-white ">
                     <!-- movie poster -->
@@ -49,7 +50,14 @@ console.log(props.movie)
                             </div>
                         </div>
                         <!-- time -->
-                        <div>
+                        <div class="text-yellow-300 flex flex-row items-center gap-2">
+                            <p class="text-4xl">{{ score.avarage }}</p>
+                            <p class="opacity-70 text-md">
+                                ({{ score.counter }})
+                            </p>
+
+                        </div>
+                        <div class="text-xl">
                             {{ movie.runtime }} mn
                         </div>
                         <!-- date -->
