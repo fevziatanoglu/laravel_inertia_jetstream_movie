@@ -30,7 +30,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('mainpage', [DashboardController::class , 'index'])->name('get.dashboard');
+Route::get('dashboard', [DashboardController::class , 'index'])->name('dashboard');
 // search
 Route::get('search', [SearchController::class, 'index'])->name('search')->middleware('auth');
 Route::get('search/{query}', [SearchController::class, 'search'])->name('search.movies')->middleware('auth');

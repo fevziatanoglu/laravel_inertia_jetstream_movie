@@ -63,9 +63,11 @@ function searchMovies() {
                 <!-- movies -->
                 <div class="flex flex-wrap  gap-4 justify-start mt-3">
                     <MovieCard v-if="movies.length > 0" v-for="movie in movies" :key="movie.id" :movie="movie"
+
                         v-bind="$page.props.auth.user.id == movieList.user_id ? { list_id: movieList.id } : {}" />
                     <p v-else class="text-5xl font-bold text-gray-500">There is no film in this list, let's add some</p>
                 </div>
+                <!-- gatest -->
 
 
 

@@ -51,9 +51,9 @@ console.log(props.score)
                         </div>
                         <!-- time -->
                         <div class="text-yellow-300 flex flex-row items-center gap-2">
-                            <p class="text-4xl">{{ score.avarage }}</p>
+                            <p class="text-4xl">{{ movie.comments_avg_score }}</p>
                             <p class="opacity-70 text-md">
-                                ({{ score.counter }})
+                                ({{ movie.comments_count }})
                             </p>
 
                         </div>

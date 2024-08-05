@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\TMDBService;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,12 @@ class Movie extends Model
         'release_date',
         'runtime',
         'backdrop_path',
-        'poster_path'
+        'poster_path',
+        
+    ];
+
+    protected $casts = [
+        'comments_avg_score' => 'float'
     ];
 
     // Attributes
@@ -38,19 +44,12 @@ class Movie extends Model
         );
     }
 
-    public static function getMovieScore(Movie $movie)
+    public static function scopeWithScore(Builder $builder)
     {
-
-        $score = 0;
-        $counter = 0;
-        foreach ($movie->comments as $comment) {
-            $score += $comment->score;
-            $counter++;
-        }
-
-        return ['avarage' => (int)$score/$counter , 'counter' => $counter];
+        $builder->withAvg('comments' , 'score');
     }
 
+       
 
     public static function findOrFetch($id)
     {

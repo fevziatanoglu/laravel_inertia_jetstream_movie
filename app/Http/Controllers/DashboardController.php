@@ -12,8 +12,15 @@ class DashboardController extends Controller
 
     public function index(){
 
+        // feed list
         $comments = Comment::all()->toArray();
         $lists = MovieList::all()->toArray();
+
+        // $posts = [
+        //     'type' => 
+        //     'resource' =>
+        //     'created_at' => 
+        // ]
 
         // $posts = array_merge($comments , $lists);
 

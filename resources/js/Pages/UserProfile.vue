@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import CommentCard from '@/Components/CommentCard.vue';
+import { Link } from '@inertiajs/vue3';
 
 
 const props = defineProps({
@@ -18,20 +19,29 @@ console.log(props.lists)
 
 <template>
     <AppLayout :title="user.name + 's profile'">
+
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ user.name }}'s profile
+            </h2>
+        </template>
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-10 ">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-10 flex flex-col gap-5">
 
 
                 <div v-if="$page.props.auth.user.id == user.id">
-                    <a :href="route('get.movielist.form')">Create Movie List</a>
+                    <Link :href="route('get.movielist.form')"
+                        class="bg-green-500 py-2 px-5 font-extrabold text-white rounded-md">Create Movie List</Link>
                 </div>
 
                 <!-- lists -->
-                <h1>My Lists</h1>
+                <h1 class="text-6xl text-bold">Lists</h1>
 
                 <div class=" flex flex-row justify-start gap-5">
-                    <a class="bg-gray-300 shadow-lg p-5 " v-for="list in lists" :key="list.id" :href="route('get.movielist', list.id)">
-                       
+                    <a class="bg-gray-300 shadow-lg p-5 " v-for="list in lists" :key="list.id"
+                        :href="route('get.movielist', list.id)">
+
 
                         <h1 class="text-xl font-bold">
                             {{ list.title }}
@@ -46,8 +56,9 @@ console.log(props.lists)
 
                 </div>
                 <!-- comment -->
+                <h1 class="text-6xl text-bold m-1">Comments</h1>
+
                 <div>
-                    <h1>my comments</h1>
                     <CommentCard v-if="comments.length > 0" v-for="comment in comments" :key="comment.id"
                         :comment="comment" />
 

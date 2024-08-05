@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('movie_lists', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
-            $table->boolean('isPublic')->default('true');
+            $table->string('description')->nullable();
+            $table->boolean('isPublic')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
